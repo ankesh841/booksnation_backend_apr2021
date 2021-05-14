@@ -179,7 +179,7 @@ app.post("/showingAllAvailable", (req, res) => {
 
 
       })
-      // console.log(array)
+      console.log(array.length)
       res.json(array);
 
 
@@ -255,15 +255,18 @@ app.get("*", function (req, res, next) {
 //google search..
 app.post("/mannualBookSearch_loginPanel", (req, res) => {
   let isbn = req.body.searchstring;
+  console.log(isbn)
   isbn = isbn.split(" ").join("+");
-  request(`https://www.googleapis.com/books/v1/volumes?q="` + isbn, function (
+
+
+  request(`https://www.googleapis.com/books/v1/volumes?q="` + "+" + isbn + "", function (
     error,
     response,
     body
   ) {
     try {
       var json = JSON.parse(body);
-
+      // console.log(body)
       if (json.totalItems == 0) {
         res.json("BOOK_NA");
       } else {
